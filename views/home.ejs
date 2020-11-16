@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") -%>
+<%- include("partials/navbar.ejs")-%>
+<div class="container my-4">
+    <h1 class="display-4">Tags:</h1>
+      <%if(tags.length ==0){%>
+         <p>No tags</p>
+        <%}%>
+      <%tags.forEach(tag=>{ %>
+        <span><a class="btn btn-outline-dark btn-sm my-1" href="/search/<%=tag%>"><%=tag%> </a></span>
+      <%})%>
+
+    <hr>
+    <h1 class="display-4">Latest Blogs</h1>
+    <hr>
+    <!-- make a row and col 4lg 6md 10sm -->
+    <% if(blogs.length ==0 ){%>
+      <p>No blogs</p>
+  <%}%>
+    <div class="row">
+      <% blogs.forEach(blog =>{ %>
+          <div class="col-12 col-lg-4 py-4 mx-auto">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= blog.title%></h5>
+                <% blog.tags.forEach(t =>{ %>
+
+                  <span class="card-subtitle mb-2 text-muted"><%=t%>  </span>
+                <%})%>
+                <p class="card-text"><%=blog.description.substring(0,100)%></p>
+                <a href="/blog/<%=blog._id%>" class="card-link">Read</a>
+              </div>
+            </div>
+          </div>
+      <% }) %>
+        <!--end of row div  -->
+    </div>
+</div>
+<%- include("partials/footer.ejs") -%>

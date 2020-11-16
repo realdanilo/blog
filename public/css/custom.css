@@ -1,0 +1,7 @@
+p.custom-wrap {
+  white-space: pre-wrap;
+}
+
+textarea {
+  min-height: 300px;
+}
