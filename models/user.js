@@ -5,10 +5,9 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    nickname:{
+    googleId:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     avatar:{
         type:String,
