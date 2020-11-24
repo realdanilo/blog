@@ -43,7 +43,9 @@ const passportSetup= require("./passportInit")
 // locals
 app.use((req,res,next)=>{
     // console.log(req.user)
-    res.locals.user = req.user 
+    res.locals.user.name = req.user.name || ''
+    res.locals.user._id = req.user._id || ''
+    res.locals.user.avatar = req.user.avatar || ''
     next()
 })
 
@@ -54,16 +56,19 @@ app.use((req,res,next)=>{
 app.get("/", (req,res)=>{
     res.redirect("/blog")
 })
-const blogRoute = require("./routes/blogRoutes")
-app.use("/blog", blogRoute)
+const blogRoutes = require("./routes/blogRoutes")
+app.use("/blog", blogRoutes)
 
 const searchRoutes = require("./routes/searchRoutes")
 app.use("/search",searchRoutes)
 
-const googleRoute = require('./routes/googleRoutes')
-app.use("/google", googleRoute)
+const googleRoutes = require('./routes/googleRoutes')
+app.use("/google", googleRoutes)
 
+const userRoutes = require("./routes/userRoutes")
+app.use("/user", userRoutes)
 
+// routes for bad google auth
 app.use("/bad", (req,res)=>{
     return res.send("Something bad happened")
 })

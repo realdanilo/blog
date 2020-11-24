@@ -16,14 +16,18 @@ passport.use(new GoogleStrategy({
     callbackURL: "/google/redirect"
   },
  async (accessToken, refreshToken, profile, done)=>{
+    //  console.log(profile)
     let user = await User.findOne({"googleId":profile.id})
     if(!user){
         // console.log("user not found, creating user")
         user = await new User({
             name:profile.displayName,
-            googleId:profile.id
+            googleId:profile.id,
+            email:profile.emails[0].value,
+            avatar:profile.photos[0].value
         })
         await user.save()
+        // console.log(user)
     }
     done(null, user)
  })

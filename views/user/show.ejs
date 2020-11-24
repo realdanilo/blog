@@ -1,0 +1,10 @@
+<%- include("../partials/header.ejs") -%>
+<%- include("../partials/navbar.ejs")-%>
+<div class="container my-4">
+    <h1>Hello</h1>
+   <pre>
+       <%=JSON.stringify(user, undefined, 2)%>
+   </pre>
+   <%=user%>
+</div>
+<%- include("../partials/footer.ejs") -%>

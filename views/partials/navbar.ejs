@@ -4,31 +4,28 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item ">
-          <a class="nav-link" href="/google">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/blog/create">Create</a>
-        </li>
-        <%if(!user ){%>
-          <p>no user</p>
+      <ul class="navbar-nav ml-auto  align-middle">
+       
+        
+        <%if(!user){%>
+          <li class="nav-item ">
+            <a class="nav-link" href="/google">Login</a>
+          </li>
           <%}else{%>
-            <%=user%>
-            <p><%=user.name%></p>
-            <%=user.avatar%>
+           
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span><img src="<%=user.avatar%>" class="rounded-circle" alt="profile image" width="30px"/></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+             
+                <a class="dropdown-item" href="/user/<%=user._id%>"><%=user.name%></a>
+                <a class="dropdown-item" href="/blog/create">Create</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Log out</a>
+              </div>
+            </li>
             <%}%>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
        
       </ul>  
     </div>
