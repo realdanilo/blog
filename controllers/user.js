@@ -1,11 +1,12 @@
 const mongoose = require("mongoose")
 const User = require("../models/user")
-
+const Blog = require("../models/blog")
 module.exports = {
     async getUser(req,res){
         try{
             const userFound = await User.findOne({_id:req.params.id})
-            return res.render("user/show",{userFound})
+           const blogs = await Blog.find({author:userFound._id},{title:1,createdAt:1}) || []
+            return res.render("user/show",{userFound, blogs})
         }catch(e){
             return res.redirect("/blog")
         }
@@ -14,8 +15,8 @@ module.exports = {
         try{
             req.body.user.name = req.sanitize(req.body.user.name)
             req.body.user.description = req.sanitize(req.body.user.description)
-            const userFound = await User.findByIdAndUpdate(req.params.id, req.body.user)
-            return res.render("user/show",{userFound})
+             await User.findByIdAndUpdate(req.params.id, req.body.user)
+            return res.redirect(`/user/${req.params.id}`)
         }catch(e){
             return res.redirect("/blog")
         }

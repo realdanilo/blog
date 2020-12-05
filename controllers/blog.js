@@ -15,7 +15,7 @@ module.exports={
     async blogShow(req,res){
         try{
             const {id}= req.params
-            const blog = await Blog.findById(id)
+            const blog = await Blog.findById(id).populate("author",{name:1}).exec()
             return res.render("blog/show",{blog})
         }catch{
             return res.render("404")
@@ -28,6 +28,7 @@ module.exports={
     },
     async blogDelete(req,res){
         await Blog.findByIdAndDelete(req.params.id)
+        if(req.query.dashboard =="true"){ return res.redirect(`/user/${res.locals.user._id}`)}
         return res.redirect("/blog")
     }
 }

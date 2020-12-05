@@ -29,8 +29,12 @@
         <label >Description:</label>
         <p class="custom-wrap"><%-blog.description%></p>
 
+        <hr>
+        <p class="lead">By: <%=blog.author.name%></p>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Edit</button>
+        <% if( user != null && blog.author.equals(user.id)){%>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Edit</button>
+          <%}%>
         </div>
     </div>
 </div>
@@ -63,13 +67,15 @@
                     <label for="description">Description</label>
                     <textarea type="password" class="form-control" id="description" placeholder="Password" name="blog[description]"><%=blog.description%></textarea>
                 </div>
-                
-                <button type="submit" class="btn btn-primary">Save</button>
+                <% if( user != null && blog.author.equals(user.id)){%>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <%}%>
                 
             </form>
             <form class="mt-2" action="/blog/<%=blog._id%>?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-danger">Delete</button>
-            
+              <% if( user != null && blog.author.equals(user.id)){%>
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <%}%>
             </form>
         </div>
         

@@ -3,12 +3,11 @@
 <div class="container my-4">
     <div class="row">
         <div class="col-xs-12 col-md-4 mb-3">
-            <h1>Hello <%= userFound.name%></h1>
+            <h2>Hey, <%= userFound.name%></h2>
             <form action="/user/<%=userFound._id%>?_method=PUT" method="POST">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" value="<%=userFound.email%>" name="user[email]" required disabled="true">
-                    <small id="emailHelp" class="form-text text-muted">Must be unique</small>
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -17,7 +16,7 @@
                
                 <div class="form-group">
                     <label for="description">Intro</label>
-                    <textarea class="form-control" id="description" rows="2" name="user[description]"><%=userFound.description%></textarea>
+                    <textarea class="form-control" id="description" height="100px" name="user[description]"><%=userFound.description%></textarea>
                   </div>
                 <div class="form-group">
                     <label for="DOB">DOB</label>
@@ -28,7 +27,28 @@
             </form>
         </div>
         <div class="col-xs-12 col-md-8">
-            <h2>Blog posts belong here</h2>
+            <h2>Blog posts:</h2>
+            <div>
+            <%blogs.forEach((blog)=>{%>
+                <div class="card mt-3" >
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="card-body">
+                                <a href="/blog/<%=blog._id%>">
+                                    <h5 class="card-title"><%=blog.title%></h5>
+                                </a>
+                                <h6 class="card-subtitle text-muted"><%=blog.createdAt.toLocaleDateString()%></h6>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <form  action="/blog/<%=blog._id%>?dashboard=true&_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <%})%>
+            </div>
         </div>
     </div>
     <script>
