@@ -8,8 +8,8 @@ module.exports={
         return res.render("home", {blogs, tags})
     },
     async blogPost(req,res){
-       
-        const blog = await Blog.create(req.body.blog)
+    //    console.log(res.locals.user._id)
+        const blog = await Blog.create({...req.body.blog, author:res.locals.user._id})
         return res.redirect(`/blog/${blog._id}`)
     },
     async blogShow(req,res){
