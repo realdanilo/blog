@@ -9,10 +9,7 @@ router.get("/", passport.authenticate("google",{scope:['profile', 'email']}))
 router.get('/redirect', 
   passport.authenticate('google', { failureRedirect: '/bad' }),
   function(req, res) {
-    res.redirect("/blog/create")
+    res.redirect("/blog")
   });
-
-
-
 
 module.exports = router

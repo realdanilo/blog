@@ -1,10 +1,41 @@
 <%- include("../partials/header.ejs") -%>
 <%- include("../partials/navbar.ejs")-%>
 <div class="container my-4">
-    <h1>Hello</h1>
-   <pre>
-       <%=JSON.stringify(user, undefined, 2)%>
-   </pre>
-   <%=user%>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 mb-3">
+            <h1>Hello <%= userFound.name%></h1>
+            <form action="/user/<%=userFound._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" value="<%=userFound.email%>" name="user[email]" required disabled="true">
+                    <small id="emailHelp" class="form-text text-muted">Must be unique</small>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" required  name="user[name]" value="<%=userFound.name%>">
+                </div>
+               
+                <div class="form-group">
+                    <label for="description">Intro</label>
+                    <textarea class="form-control" id="description" rows="2" name="user[description]"><%=userFound.description%></textarea>
+                  </div>
+                <div class="form-group">
+                    <label for="DOB">DOB</label>
+                    <input type="date" class="form-control" id="DOB" placeholder="Date of Birthday"  max="2003-12-31"  name="user[DOB]">
+                </div>
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <h2>Blog posts belong here</h2>
+        </div>
+    </div>
+    <script>
+        let myDate = <%- JSON.stringify(userFound.DOB)%>;
+        let goodDate = `${myDate.slice(0,10)}`
+        let dateInput = document.getElementById("DOB")
+        dateInput.value= goodDate
+    </script>
 </div>
 <%- include("../partials/footer.ejs") -%>

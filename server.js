@@ -43,9 +43,7 @@ const passportSetup= require("./passportInit")
 // locals
 app.use((req,res,next)=>{
     // console.log(req.user)
-    res.locals.user.name = req.user.name || ''
-    res.locals.user._id = req.user._id || ''
-    res.locals.user.avatar = req.user.avatar || ''
+    res.locals.user = req.user
     next()
 })
 
@@ -70,7 +68,8 @@ app.use("/user", userRoutes)
 
 // routes for bad google auth
 app.use("/bad", (req,res)=>{
-    return res.send("Something bad happened")
+    // return res.send("Something bad happened")
+    return res.redirect("/")
 })
 
 app.get("/logout",(req,res)=>{
