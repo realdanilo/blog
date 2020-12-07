@@ -52,7 +52,7 @@ app.use((req,res,next)=>{
 
 // Routes
 app.get("/", (req,res)=>{
-    res.redirect("/blog")
+    return res.redirect("/blog")
 })
 const blogRoutes = require("./routes/blogRoutes")
 app.use("/blog", blogRoutes)
