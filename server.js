@@ -1,12 +1,12 @@
-require('dotenv').config()
+const path = require('path')
+if(process.env.NODE_ENV !="production") require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const expressSanitizer = require("express-sanitizer")
 const methodOverride = require("method-override")
 const bodyParser = require("body-parser")
 const passport = require("passport")
 const express = require("express")
-const path = require("path")
+// const path = require("path")
 const app = express()
-
 // Files
 app.use(express.static(path.join(__dirname,"public")))
 app.set("view engine", "ejs")
